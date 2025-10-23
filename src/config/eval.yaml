@@ -1,0 +1,18 @@
+habitat_baselines:
+  num_environments: 6
+  rl:
+    ppo:
+      random_crop: False
+  eval:
+    use_ckpt_config: False
+
+  # "disk", "tensorboard"
+  video_option: []
+  test_episode_count: -1
+
+habitat:
+  environment:
+    max_episode_steps: 500
+  task:
+    imagegoal_sensor_v2:
+      sampling_type: uniform

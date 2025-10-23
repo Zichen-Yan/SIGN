@@ -1,0 +1,69 @@
+habitat_baselines:
+  num_environments: 4
+  trainer_name: "SIGN"
+  simulator_gpu_id: 0
+  torch_gpu_id: 0
+  rl:
+    policy:
+      # [NavNetPolicy, SafeNavNetPolicy]
+      name: SafeNavNetPolicy
+      safety_model_path: "ckpt/safety_model.pth"
+
+      action_dist:
+        min_std: 0.001
+        max_std: 1
+
+    data_augmentation:
+      mrq: True
+      stop_step: 50000000
+
+      shift: True
+      pad: 8
+    ppo:
+      num_mini_batch: 2
+      ppo_epoch: 4
+      num_steps: 512
+      use_linear_lr_decay: False
+      use_normalized_advantage: False
+      # [PPO,DA_PPO]
+      agent_name: DA_PPO
+      verbose: False
+      # para for policy network
+      backbone: fast_resnet9
+      goal_backbone: None
+      rnn_type: GRU
+      num_recurrent_layers: 2
+
+      rollout_type: 'CostRolloutStorage'
+
+      hidden_size: 128
+      input_size: 128
+      visual_encoder_embedding_size: 512
+
+      visual_obs_inputs: ['rgb', 'imagegoal_sensor_v2'] #, 'depth'
+
+      obs_transform: ResizeCenterCropper
+
+      task_type_embed: False
+      task_type_embed_size: 64
+
+      use_clipped_value_loss: True
+      use_critic_norm: False
+
+habitat:
+  seed: 100
+  simulator:
+    turn_angle: 30
+    # ["v0", "continuous"]
+    action_space_config: "continuous"
+  task:
+    view_match:
+      angle_threshold: 25.0
+    actions:
+      continuous_control:
+        type: ContinuousAction
+        lin_vel_range: [0.0, 0.25]
+        ang_vel_range: [-15.0, 15.0]
+        min_abs_lin_speed: 0.025
+        min_abs_ang_speed: 1.5
+        time_step: 1.0
