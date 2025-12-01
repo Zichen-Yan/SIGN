@@ -637,8 +637,6 @@ class PPOTrainer(BaseRLTrainer):
             ckpt_dict = self.load_checkpoint(checkpoint_path, map_location="cpu")
             if safe_network_path is not None and os.path.exists(safe_network_path):
                 safe_ckpt_dict = self.load_checkpoint(safe_network_path, map_location="cpu")
-            step_id = ckpt_dict["extra_state"]["step"]
-            print(step_id)
         else:
             ckpt_dict = {}
 
