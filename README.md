@@ -34,14 +34,14 @@ data
 ├── datasets
 │   └── imagenav
 │       ├── gibson
-│       ├   ├── v1
-│       ├       ├── train
-│       ├       └── val
+│       │   ├── v1
+│       │       ├── train
+│       │       └── val
 │       ├── hm3d
-│       ├   ├── v1
-│       ├       ├── val_easy
-│       ├       ├── val_hard
-│       ├       └── val_medium
+│       │   ├── v1
+│       │       ├── val_easy
+│       │       ├── val_hard
+│       │       └── val_medium
 │       └── mp3d
 │           ├── v1
 │               ├── test_easy
