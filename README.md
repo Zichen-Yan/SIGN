@@ -29,6 +29,40 @@ pip install -r requirements.txt
 ## 2. Download Dataset
 Dataset preparation refers to https://github.com/XinyuSun/FGPrompt
 
+<pre>
+data
+├── datasets
+│   └── imagenav
+│       ├── gibson
+│       ├   ├── v1
+│       ├       ├── train
+│       ├       └── val
+│       ├── hm3d
+│       ├   ├── v1
+│       ├       ├── val_easy
+│       ├       ├── val_hard
+│       ├       └── val_medium
+│       └── mp3d
+│           ├── v1
+│               ├── test_easy
+│               ├── test_hard
+│               └── test_medium
+└── scene_datasets
+    ├── gibson
+    │   ├── xx.glb
+    │   └── xx.navmesh
+    ├── hm3d
+    │   ├── scene_id
+    │       ├── xx.glb
+    │       └── xx.navmesh
+    └── mp3d
+        ├── scene_id
+            ├── xx.glb
+            └── xx.navmesh
+
+
+</pre>
+
 ## 3. Run ImageNav Training
 ```bash
 python run_sim.py --overwrite \
@@ -45,18 +79,20 @@ habitat_baselines.eval_ckpt_path_dir ckpt/nav_model.pth
 ```
 
 ## 5. Cross-domain Evaluation
+difficulty= [val_easy, val_hard, val_medium]
 ```bash
 python run_sim.py \
 --exp-config exp_config/ppo_imagenav_hm3d.yaml,policy,reward,sensors,eval \
 --run-type eval --model-dir ckpt \
 habitat_baselines.eval_ckpt_path_dir ckpt/nav_model.pth \
-habitat_baselines.eval.split val_hard
+habitat_baselines.eval.split val_easy
 ```
+difficulty= [test_easy, test_hard, test_medium]
 ```bash
 python run_sim.py \
 --exp-config exp_config/ppo_imagenav_mp3d.yaml,policy,reward,sensors,eval \
 --run-type eval --model-dir ckpt \
 habitat_baselines.eval_ckpt_path_dir ckpt/nav_model.pth \
-habitat_baselines.eval.split test_hard
+habitat_baselines.eval.split test_easy
 ```
 
