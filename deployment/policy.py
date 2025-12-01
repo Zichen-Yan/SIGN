@@ -446,7 +446,6 @@ class SafeNavNetPolicy(NetPolicy):
         vec = self.Qc.vec
         left_min = vec[:, :6].min()
         right_min = vec[:, -6:].min()
-        mid_min = vec[:, 3:-3].min()
 
         if self.prev_dir == 0:
             if (left_min > right_min):
@@ -458,8 +457,8 @@ class SafeNavNetPolicy(NetPolicy):
             dir = self.prev_dir
 
         for i in range(Niter):
-            action[:, 0] += 0.3 * dir # 0.4
-            action[:, 1] -= 0.3 # 0.2
+            action[:, 0] += 0.3 * dir
+            action[:, 1] -= 0.3
 
             pred = self.Qc(obs, action, in_gazebo=in_gazebo).item()
             print('pred:', pred, 'action:', action)

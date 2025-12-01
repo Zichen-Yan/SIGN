@@ -27,7 +27,7 @@ class DA_PPO(torch.nn.Module):
         super().__init__()  # Properly initialize nn.Module
         self.actor_critic = actor_critic
 
-class OrinTrainer:
+class DeployTrainer:
     def __init__(self, config=None, add_control=False, add_lpips=False, fix_obs=True, safe_correction=False, plot=False, take_snapshot=False, video=False, hd_video=False):
         super().__init__()
         self.config = config

@@ -30,8 +30,6 @@ def _np_invert_permutation(permutation: np.ndarray) -> np.ndarray:
     return np.argsort(permutation.ravel()).reshape(permutation.shape)
 
 
-# This is some pretty wild code. I recommend you just trust
-# the unit test on it and leave it be.
 def build_pack_info_from_episode_ids(
     episode_ids: np.ndarray,
     environment_ids: np.ndarray,

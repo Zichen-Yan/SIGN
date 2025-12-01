@@ -13,7 +13,7 @@ from PIL import Image as Img
 from deployment.utils import ResizeCenterCropper
 import lpips
 import matplotlib.pyplot as plt
-# from controller_msgs.msg import FlatTarget
+from controller_msgs.msg import FlatTarget
 import tf
 
 class Env:
@@ -188,7 +188,7 @@ class Env:
 
     def on_key_press(self, event):
         if event.key == "s":
-            filename = "deployment/target_image/target9.png"
+            filename = "deployment/target_image/target1.png"
             img = Img.fromarray(self.raw_rgb_image)
             img.save(filename)
             print(f"Image saved to {filename}")
@@ -207,14 +207,10 @@ class Env:
 
         if self.rgb_image is None:
             self.rgb_image = self.current_rgb
-        # plt.imshow(self.rgb_image)
-        # plt.show()
+
 
     def get_depth(self):
         depth_image = self.depth_node.get_latest_image()
-        # plt.imshow(depth_image, cmap="gray", vmin=0, vmax=1)
-        # plt.colorbar()
-        # plt.show()
         if depth_image is None:
             self.depth_image = self.current_depth
         else:
@@ -252,7 +248,6 @@ class DepthSubscriber:
         cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding=msg.encoding)
         image = np.array(cv_image, dtype=np.float32)
 
-        # image = cv2.resize(image, (128, 128), interpolation=cv2.INTER_NEAREST)
         image = image[:,100:-100] # 480x848
 
         image = image / 1000

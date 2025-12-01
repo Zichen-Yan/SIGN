@@ -3,7 +3,7 @@ import os.path
 import random
 import numpy as np
 import torch
-from deployment.trainer import OrinTrainer
+from deployment.trainer import DeployTrainer
 import yaml
 from pathlib import Path
 
@@ -17,7 +17,7 @@ class ConfigObject:
                 setattr(self, key, value)
 def main(add_control, add_lpips, fix_obs, safe_correction, plot, take_snapshot, video, hd_video):
     current_dir = Path(__file__).parent
-    yaml_path = "TBD"
+    yaml_path = "deployment/config_of_train.yaml"
     with open(os.path.join(current_dir, yaml_path), 'r') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
     config = ConfigObject(config)
@@ -25,9 +25,9 @@ def main(add_control, add_lpips, fix_obs, safe_correction, plot, take_snapshot, 
     np.random.seed(0)
     torch.manual_seed(0)
 
-    trainer = OrinTrainer(config, add_control, add_lpips, fix_obs, safe_correction, plot, take_snapshot, video, hd_video)
+    trainer = DeployTrainer(config, add_control, add_lpips, fix_obs, safe_correction, plot, take_snapshot, video, hd_video)
     trainer.eval()
 
 
 if __name__ == "__main__":
-    main(add_control=True, add_lpips=True, fix_obs=False, safe_correction=True, plot=True, take_snapshot=False, video=True, hd_video=True)
+    main(add_control=True, add_lpips=True, fix_obs=False, safe_correction=True, plot=False, take_snapshot=False, video=False, hd_video=False)
