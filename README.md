@@ -1,3 +1,5 @@
+## [Project website](https://nus-core.github.io/assets/standalone/SIGN/index.html)
+
 ## 1. Install
 ### 1.1 Install habitat-lab 
 ```bash
