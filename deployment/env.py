@@ -3,7 +3,7 @@ import rospy
 import numpy as np
 from sensor_msgs.msg import Image, CompressedImage
 from geometry_msgs.msg import PoseStamped, Quaternion
-from mavros_msgs.msg import State, RCIn, PositionTarget
+from mavros_msgs.msg import State, PositionTarget
 from std_msgs.msg import Header
 from cv_bridge import CvBridge
 import cv2
@@ -34,10 +34,9 @@ class Env:
         self.min_abs_lin_speed = action_cfg.min_abs_lin_speed
         self.min_abs_ang_speed = action_cfg.min_abs_ang_speed
 
-        factor = 1
-        self.max_lin_vel = factor * self.max_lin_vel
-        self.min_abs_lin_speed = factor * self.min_abs_lin_speed
-        self.min_abs_ang_speed = factor * self.min_abs_ang_speed
+        self.max_lin_vel = self.max_lin_vel
+        self.min_abs_lin_speed = self.min_abs_lin_speed
+        self.min_abs_ang_speed = self.min_abs_ang_speed
         # ================================
         self.observation_spaces = gym.spaces.Dict({
             "rgb": gym.spaces.Box(low=0, high=255, shape=(128, 128, 3), dtype=np.uint8),
@@ -52,18 +51,14 @@ class Env:
         self.current_state = State()
         self.last_state = State()
         self.current_local_position = PoseStamped()
-        self.current_rc_in = RCIn()
-        self.offboard_channel_value = 2000
         self.rgb_image = None
         self.depth_image = None
-        self.current_rc_in = None
         self.bridge = CvBridge()
 
         # Control ===========
         if add_control:
             rospy.Subscriber("/mavros/state", State, callback=self.state_cb)
             rospy.Subscriber("/mavros/local_position/pose", PoseStamped, self.local_position_callback)
-            rospy.Subscriber("/mavros/rc/in", RCIn, self.rc_in_callback)
             # Publisher
             self.vel_pub = rospy.Publisher("/reference/flatsetpoint", FlatTarget, queue_size=10)
             self.last_req = rospy.Time.now()
@@ -89,10 +84,6 @@ class Env:
 
     def local_position_callback(self, data):
         self.current_local_position = data
-
-    def rc_in_callback(self, data):
-        self.current_rc_in = data
-        self.offboard_channel_value = self.current_rc_in.channels[6]  # Switch A: offboard channel
 
     def com_lpips(self, img1, img2):
         img1 = torch.from_numpy(img1).unsqueeze(0)
