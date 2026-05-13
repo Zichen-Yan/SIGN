@@ -1,4 +1,7 @@
-## [Project website](https://nus-core.github.io/assets/standalone/SIGN/index.html)
+## [Project Website](https://nus-core.github.io/assets/standalone/SIGN/index.html)
+[![arXiv](https://img.shields.io/badge/arXiv-2310.07473-b31b1b.svg)](https://arxiv.org/pdf/2508.12394)
+[![Watch Demo](https://img.shields.io/badge/Watch-Demo-red?logo=youtube&logoColor=white)](https://nus-core.github.io/assets/standalone/SIGN/index.html)
+[![Visitors](https://komarev.com/ghpvc/?username=Zichen-Yan&repo=SIGN)](https://github.com/Zichen-Yan/SIGN)
 
 ## 1. Install
 ### 1.1 Install habitat-lab 
@@ -98,3 +101,16 @@ habitat_baselines.eval_ckpt_path_dir ckpt/nav_model.pth \
 habitat_baselines.eval.split test_easy
 ```
 
+## 6. Citation
+```
+@article{yan2025sign,
+  title={SIGN: Safety-Aware Image-Goal Navigation for Autonomous Drones via Reinforcement Learning},
+  author={Yan, Zichen and Huang, Rui and He, Lei and Guo, Shao and Zhao, Lin},
+  journal={IEEE Robotics and Automation Letters},
+  volume={11},
+  number={2},
+  pages={1962--1969},
+  year={2025},
+  publisher={IEEE}
+}
+```
