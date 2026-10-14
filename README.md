@@ -1,7 +1,6 @@
 ## [Project Website](https://nus-core.github.io/assets/standalone/SIGN/index.html)
 [![arXiv](https://img.shields.io/badge/arXiv-2310.07473-b31b1b.svg)](https://arxiv.org/pdf/2508.12394)
 [![Watch Demo](https://img.shields.io/badge/Watch-Demo-red?logo=youtube&logoColor=white)](https://nus-core.github.io/assets/standalone/SIGN/index.html)
-[![Visitors](https://komarev.com/ghpvc/?username=Zichen-Yan&repo=SIGN)](https://github.com/Zichen-Yan/SIGN)
 
 ## 1. Install
 ### 1.1 Install habitat-lab 
